@@ -1,0 +1,2 @@
+# Dereshihihihi
+Aşk yani love
