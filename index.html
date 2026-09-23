@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#6f547e">
+
+  <title>Bizim Hikâyemiz 🤍</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      color: #fff8f4;
+      overflow-x: hidden;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(255,178,183,.35), transparent 28%),
+        radial-gradient(circle at 85% 25%, rgba(180,135,202,.35), transparent 30%),
+        linear-gradient(160deg, #4e405f, #765677 40%, #b66f7e 70%, #e19576);
+    }
+
+    .screen {
+      min-height: 100svh;
+      padding: 30px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+    }
+
+    .card {
+      width: min(92vw, 520px);
+      padding: 24px;
+      border-radius: 30px;
+      background: rgba(255,255,255,.13);
+      border: 1px solid rgba(255,255,255,.25);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 20px 60px rgba(35,18,46,.25);
+    }
+
+    h1 {
+      font-size: clamp(32px, 8vw, 58px);
+      margin-bottom: 18px;
+      line-height: 1.1;
+    }
+
+    h2 {
+      font-size: clamp(27px, 7vw, 42px);
+      margin-bottom: 16px;
+    }
+
+    p {
+      font-size: 17px;
+      line-height: 1.7;
+      opacity: .95;
+    }
+
+    .quote {
+      font-size: clamp(23px, 6vw, 36px);
+      line-height: 1.4;
+      font-style: italic;
+      margin: 20px 0;
+    }
+
+    .photo-placeholder,
+    .video-placeholder {
+      width: 100%;
+      min-height: 300px;
+      border-radius: 24px;
+      margin: 20px 0;
+      border: 2px dashed rgba(255,255,255,.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(255,255,255,.08);
+      color: rgba(255,255,255,.8);
+    }
+
+    .video-placeholder {
+      min-height: 210px;
+    }
+
+    button {
+      border: 0;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .main-button {
+      margin-top: 22px;
+      padding: 16px 28px;
+      border-radius: 999px;
+      font-size: 18px;
+      background: #fff5ed;
+      color: #704d69;
+      box-shadow: 0 10px 30px rgba(54,30,61,.25);
+      transition: .25s ease;
+    }
+
+    .main-button:hover {
+      transform: translateY(-3px) scale(1.02);
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .memory {
+      aspect-ratio: 1 / 1;
+      border-radius: 20px;
+      background: rgba(255,255,255,.12);
+      border: 1px dashed rgba(255,255,255,.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+      font-size: 14px;
+    }
+
+    .question-area {
+      position: relative;
+      width: min(92vw, 520px);
+      min-height: 480px;
+    }
+
+    #yesBtn {
+      width: 80%;
+      padding: 20px;
+      margin-top: 25px;
+      border-radius: 999px;
+      background: #fff4ec;
+      color: #76546d;
+      font-size: 25px;
+      font-weight: bold;
+      box-shadow: 0 12px 35px rgba(43,25,52,.25);
+    }
+
+    #noBtn {
+      position: absolute;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.65);
+      color: #74566c;
+      font-size: 11px;
+      left: 45%;
+      top: 370px;
+      transition: left .15s, top .15s;
+    }
+
+    #finalScreen {
+      display: none;
+    }
+
+    .heart {
+      position: fixed;
+      bottom: -40px;
+      pointer-events: none;
+      animation: floatUp 7s linear forwards;
+      opacity: .7;
+      z-index: 10;
+    }
+
+    @keyframes floatUp {
+      to {
+        transform: translateY(-115vh) rotate(25deg);
+        opacity: 0;
+      }
+    }
+
+    .tiny {
+      margin-top: 16px;
+      font-size: 13px;
+      opacity: .7;
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        padding: 20px;
+        border-radius: 26px;
+      }
+
+      .gallery {
+        gap: 9px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- MÜZİK -->
+  <audio id="music" loop>
+    <source src="muzik.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- AÇILIŞ -->
+  <section class="screen" id="home">
+    <div class="card">
+      <div class="photo-placeholder">
+        Buraya açılış görselimizi koyacağız 🤍
+      </div>
+
+      <div class="quote">
+        “Kader gayrete aşıkmış,<br>
+        gel hem kadere hem tüm insanlığa<br>
+        aşkı gösterelim.”
+      </div>
+
+      <button class="main-button" onclick="startStory()">
+        Hikâyemize dokun 🤍
+      </button>
+
+      <div class="tiny">Ses bu düğmeye dokunduktan sonra başlayacak.</div>
+    </div>
+  </section>
+
+
+  <!-- MCDONALDS + AVATAR -->
+  <section class="screen" id="memory">
+    <div class="card">
+      <h2>Bazı anlar küçüktür ama hiç unutulmaz…</h2>
+
+      <div class="photo-placeholder">
+        Buraya McDonald's + Avatar görselimizi koyacağız 🍟
+      </div>
+
+      <p>
+        Belki dışarıdan yalnızca sıradan bir gündü.<br>
+        Ama benim için hâlâ gülümseyerek hatırladığım anlardan biri.
+      </p>
+
+      <button class="main-button"
+        onclick="document.getElementById('album').scrollIntoView()">
+        Anılara devam et →
+      </button>
+    </div>
+  </section>
+
+
+  <!-- FOTOĞRAF VE VİDEOLAR -->
+  <section class="screen" id="album">
+    <div class="card">
+      <h2>Anılarımız 🤍</h2>
+
+      <p>
+        Birkaç fotoğrafa sığan, ama aslında çok daha büyük olan hikâyemiz.
+      </p>
+
+      <div class="gallery">
+        <div class="memory">Fotoğraf 1 📷</div>
+        <div class="memory">Fotoğraf 2 📷</div>
+        <div class="memory">Fotoğraf 3 📷</div>
+        <div class="memory">Fotoğraf 4 📷</div>
+      </div>
+
+      <div class="video-placeholder">
+        Buraya videomuzu koyacağız 🎬
+      </div>
+
+      <div class="video-placeholder">
+        Buraya ikinci videomuzu koyacağız 🎞️
+      </div>
+
+      <button class="main-button"
+        onclick="document.getElementById('question').scrollIntoView()">
+        Bir şey daha soracağım…
+      </button>
+    </div>
+  </section>
+
+
+  <!-- SORU -->
+  <section class="screen" id="question">
+    <div class="question-area card">
+
+      <h2>Şimdi asıl soruya geldik…</h2>
+
+      <p class="quote">
+        Benimle yeniden bir<br>
+        McDonald's + Avatar<br>
+        randevusuna gelir misin?
+      </p>
+
+      <button id="yesBtn" onclick="sayYes()">
+        EVET 🤍
+      </button>
+
+      <button id="noBtn"
+        onmouseenter="escapeNo()"
+        ontouchstart="escapeNo()"
+        onclick="escapeNo()">
+        Hayır
+      </button>
+
+    </div>
+  </section>
+
+
+  <!-- FİNAL -->
+  <section class="screen" id="finalScreen">
+    <div class="card">
+
+      <h1>Doğru kararı vereceğini biliyorduk 🤍</h1>
+
+      <p>
+        Belki bazı hikâyeler yeniden yazılmayı hak eder.
+      </p>
+
+      <div class="gallery">
+        <div class="memory">Çocukluk fotoğrafı 1 🌙</div>
+        <div class="memory">Çocukluk fotoğrafı 2 ⭐</div>
+      </div>
+
+      <p class="quote">
+        Bu sefer hikâyenin devamını birlikte yazalım mı?
+      </p>
+
+    </div>
+  </section>
+
+
+<script>
+
+  function startStory() {
+    const music = document.getElementById("music");
+
+    music.volume = 0.45;
+    music.play().catch(() => {});
+
+    document.getElementById("memory").scrollIntoView({
+      behavior: "smooth"
+    });
+  }
+
+
+  function escapeNo() {
+
+    const button = document.getElementById("noBtn");
+    const box = document.querySelector(".question-area");
+
+    const maxX = box.clientWidth - button.offsetWidth - 25;
+    const maxY = box.clientHeight - button.offsetHeight - 25;
+
+    const x = Math.max(10, Math.random() * maxX);
+    const y = Math.max(100, Math.random() * maxY);
+
+    button.style.left = x + "px";
+    button.style.top = y + "px";
+  }
+
+
+  function sayYes() {
+
+    document.getElementById("question").style.display = "none";
+
+    const final = document.getElementById("finalScreen");
+    final.style.display = "flex";
+
+    final.scrollIntoView({
+      behavior: "smooth"
+    });
+
+    for (let i = 0; i < 18; i++) {
+      setTimeout(createHeart, i * 180);
+    }
+  }
+
+
+  function createHeart() {
+
+    const heart = document.createElement("div");
+
+    heart.className = "heart";
+    heart.innerHTML = Math.random() > .5 ? "♡" : "♥";
+
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (18 + Math.random() * 28) + "px";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 7000);
+  }
+
+</script>
+
+</body>
+</html>
