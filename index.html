@@ -357,6 +357,101 @@
 .memory-photo:hover {
   transform: scale(1.04);
 }
+    .proposal-screen {
+  width: 100%;
+  height: 100svh;
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  background: #24191f;
+}
+
+.proposal-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Butonların bulunduğu alan */
+.proposal-buttons {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  min-height: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  z-index: 5;
+}
+
+/* EVET */
+.proposal-buttons #yesBtn {
+  position: absolute;
+  left: 50%;
+  bottom: 45px;
+  transform: translateX(-50%);
+
+  width: min(72%, 420px);
+  padding: 18px 25px;
+
+  border: none;
+  border-radius: 999px;
+
+  background: rgba(255, 247, 240, 0.96);
+  color: #704d69;
+
+  font-size: 23px;
+  font-weight: bold;
+
+  box-shadow: 0 10px 35px rgba(0,0,0,.32);
+  z-index: 6;
+}
+
+/* HAYIR - başlangıçta EVET'in ÜSTÜNDE DEĞİL */
+.proposal-buttons #noBtn {
+  position: absolute;
+
+  left: auto;
+  right: 35px;
+  top: auto;
+  bottom: 55px;
+
+  padding: 7px 13px;
+
+  border: none;
+  border-radius: 999px;
+
+  background: rgba(255,255,255,.82);
+  color: #72566a;
+
+  font-size: 11px;
+  z-index: 7;
+}
+
+/* Telefonda görselin tamamı kaybolmasın */
+@media (max-width: 600px) and (orientation: portrait) {
+
+  .proposal-photo {
+    object-fit: contain;
+    background: #24191f;
+  }
+
+  .proposal-buttons #yesBtn {
+    bottom: 35px;
+    width: 68%;
+  }
+
+  .proposal-buttons #noBtn {
+    right: 18px;
+    bottom: 43px;
+  }
+}
   </style>
 
 </head>
@@ -444,27 +539,15 @@
   </section>
 
 
- <!-- TEKLİF EKRANI -->
-<section class="date-screen" id="question">
+<!-- MCDONALDS TEKLİF EKRANI -->
+<section class="proposal-screen" id="question">
 
   <img
-    src="./21267467-ec61-4907-9b7e-8bed08633109.png"
-    alt="McDonalds ve Avatar anımız"
-    class="date-photo">
+    src="./7fca7983-fb68-40ff-9b06-e6cfe059b1cd.png"
+    alt="McDonald's randevu teklifi"
+    class="proposal-photo">
 
-  <div class="date-darkness"></div>
-
-  <div class="question-area date-content">
-
-    <div class="date-text">
-      <div class="small-date-text">Bir anıyı yeniden yaşayalım mı? 🍟</div>
-
-      <h2>
-        Benimle yeniden bir<br>
-        McDonald's + Avatar<br>
-        randevusuna gelir misin?
-      </h2>
-    </div>
+  <div class="proposal-buttons question-area">
 
     <button id="yesBtn" onclick="sayYes()">
       EVET 🤍
@@ -472,15 +555,37 @@
 
     <button
       id="noBtn"
-      onmouseenter="escapeNo()"
-      ontouchstart="escapeNo()"
-      onclick="escapeNo()">
-      Hayır
-    </button>
+     function escapeNo() {
+
+  const button = document.getElementById("noBtn");
+  const box = document.querySelector("#question .question-area");
+
+  const maxX = box.clientWidth - button.offsetWidth - 20;
+  const maxY = box.clientHeight - button.offsetHeight - 20;
+
+  let x;
+  let y;
+
+  do {
+    x = 15 + Math.random() * (maxX - 15);
+    y = 80 + Math.random() * (maxY - 180);
+  }
+  while (
+    y > box.clientHeight - 180 &&
+    x > box.clientWidth * 0.15 &&
+    x < box.clientWidth * 0.85
+  );
+
+  button.style.left = x + "px";
+  button.style.right = "auto";
+  button.style.top = y + "px";
+  button.style.bottom = "auto";
+}
 
   </div>
 
 </section>
+
 
 
   <!-- FİNAL -->
