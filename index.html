@@ -560,6 +560,8 @@
   onclick="escapeNo(); return false;">
   Hayır
 </button>
+  
+
   </div>
 
 </section>
@@ -601,22 +603,20 @@
     });
   }
 function escapeNo() {
-
   const button = document.getElementById("noBtn");
   const box = document.querySelector("#question .proposal-buttons");
 
   const maxX = box.clientWidth - button.offsetWidth - 20;
-  const maxY = box.clientHeight - button.offsetHeight - 180;
+  const maxY = box.clientHeight - button.offsetHeight - 170;
 
-  const x = 20 + Math.random() * Math.max(0, maxX - 20);
-  const y = 80 + Math.random() * Math.max(0, maxY - 80);
+  const x = 20 + Math.random() * Math.max(10, maxX - 20);
+  const y = 70 + Math.random() * Math.max(10, maxY - 70);
 
   button.style.left = x + "px";
   button.style.right = "auto";
   button.style.top = y + "px";
   button.style.bottom = "auto";
 }
-
 
 
   function sayYes() {
