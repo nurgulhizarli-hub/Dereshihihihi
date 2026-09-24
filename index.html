@@ -554,34 +554,12 @@
     </button>
 
     <button
-      id="noBtn"
-     function escapeNo() {
-
-  const button = document.getElementById("noBtn");
-  const box = document.querySelector("#question .question-area");
-
-  const maxX = box.clientWidth - button.offsetWidth - 20;
-  const maxY = box.clientHeight - button.offsetHeight - 20;
-
-  let x;
-  let y;
-
-  do {
-    x = 15 + Math.random() * (maxX - 15);
-    y = 80 + Math.random() * (maxY - 180);
-  }
-  while (
-    y > box.clientHeight - 180 &&
-    x > box.clientWidth * 0.15 &&
-    x < box.clientWidth * 0.85
-  );
-
-  button.style.left = x + "px";
-  button.style.right = "auto";
-  button.style.top = y + "px";
-  button.style.bottom = "auto";
-}
-
+  id="noBtn"
+  onmouseenter="escapeNo()"
+  ontouchstart="escapeNo(); return false;"
+  onclick="escapeNo(); return false;">
+  Hayır
+</button>
   </div>
 
 </section>
@@ -622,22 +600,23 @@
       behavior: "smooth"
     });
   }
+function escapeNo() {
 
+  const button = document.getElementById("noBtn");
+  const box = document.querySelector("#question .proposal-buttons");
 
-  function escapeNo() {
+  const maxX = box.clientWidth - button.offsetWidth - 20;
+  const maxY = box.clientHeight - button.offsetHeight - 180;
 
-    const button = document.getElementById("noBtn");
-    const box = document.querySelector(".question-area");
+  const x = 20 + Math.random() * Math.max(0, maxX - 20);
+  const y = 80 + Math.random() * Math.max(0, maxY - 80);
 
-    const maxX = box.clientWidth - button.offsetWidth - 25;
-    const maxY = box.clientHeight - button.offsetHeight - 25;
+  button.style.left = x + "px";
+  button.style.right = "auto";
+  button.style.top = y + "px";
+  button.style.bottom = "auto";
+}
 
-    const x = Math.max(10, Math.random() * maxX);
-    const y = Math.max(100, Math.random() * maxY);
-
-    button.style.left = x + "px";
-    button.style.top = y + "px";
-  }
 
 
   function sayYes() {
