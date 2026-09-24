@@ -236,6 +236,99 @@
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
+    .date-screen {
+  width: 100%;
+  height: 100svh;
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+.date-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.date-darkness {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(35, 15, 35, 0.12),
+      rgba(35, 15, 35, 0.24) 50%,
+      rgba(35, 15, 35, 0.55)
+    );
+  z-index: 1;
+}
+
+.question-area.date-content {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  max-width: none;
+  padding: 30px 22px 55px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  z-index: 2;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.date-text {
+  width: min(92%, 560px);
+  padding: 22px 18px;
+  margin-bottom: 18px;
+  border-radius: 28px;
+  text-align: center;
+  background: rgba(74, 42, 68, 0.42);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.date-text h2 {
+  margin: 8px 0 0;
+  color: #fffaf6;
+  text-shadow: 0 3px 12px rgba(0,0,0,.35);
+}
+
+.small-date-text {
+  font-size: 15px;
+  color: #ffe9e2;
+}
+
+#yesBtn {
+  width: min(80%, 400px);
+  margin-top: 0;
+  padding: 18px 25px;
+  border-radius: 999px;
+  background: rgba(255, 246, 239, 0.95);
+  color: #6f4d68;
+  font-size: 23px;
+  font-weight: bold;
+  z-index: 4;
+}
+
+#noBtn {
+  position: absolute;
+  left: 48%;
+  top: 88%;
+  padding: 7px 12px;
+  border-radius: 999px;
+  font-size: 11px;
+  z-index: 5;
+}
   </style>
 
 </head>
@@ -264,27 +357,29 @@
   </div>
 
 </section>
-  <!-- MCDONALDS + AVATAR -->
-  <section class="screen" id="memory">
-    <div class="card">
-      <h2>Bazı anlar küçüktür ama hiç unutulmaz…</h2>
+  <!-- KÜÇÜK GEÇİŞ EKRANI -->
+<section class="screen" id="memory">
+  <div class="card">
 
-      <img
-  src="21267467-ec61-4907-9b7e-8bed08633109.png"
-  alt="McDonalds ve Avatar anımız"
-  class="story-photo">
+    <h2>Bazı anlar küçüktür ama hiç unutulmaz…</h2>
 
-      <p>
-        Belki dışarıdan yalnızca sıradan bir gündü.<br>
-        Ama benim için hâlâ gülümseyerek hatırladığım anlardan biri.
-      </p>
+    <p>
+      Bazen bir yer, bir film ya da küçücük bir an
+      yıllar geçse bile aynı duyguyu hatırlatır.
+    </p>
 
-      <button class="main-button"
-        onclick="document.getElementById('album').scrollIntoView()">
-        Anılara devam et →
-      </button>
-    </div>
-  </section>
+    <p style="margin-top: 18px;">
+      Bizim hikâyemizde de öyle bir an var. 🤍
+    </p>
+
+    <button
+      class="main-button"
+      onclick="document.getElementById('album').scrollIntoView({behavior:'smooth'})">
+      Biraz daha hatırlayalım →
+    </button>
+
+  </div>
+</section>
 
 
   <!-- FOTOĞRAF VE VİDEOLAR -->
@@ -319,31 +414,43 @@
   </section>
 
 
-  <!-- SORU -->
-  <section class="screen" id="question">
-    <div class="question-area card">
+ <!-- TEKLİF EKRANI -->
+<section class="date-screen" id="question">
 
-      <h2>Şimdi asıl soruya geldik…</h2>
+  <img
+    src="./21267467-ec61-4907-9b7e-8bed08633109.png"
+    alt="McDonalds ve Avatar anımız"
+    class="date-photo">
 
-      <p class="quote">
+  <div class="date-darkness"></div>
+
+  <div class="question-area date-content">
+
+    <div class="date-text">
+      <div class="small-date-text">Bir anıyı yeniden yaşayalım mı? 🍟</div>
+
+      <h2>
         Benimle yeniden bir<br>
         McDonald's + Avatar<br>
         randevusuna gelir misin?
-      </p>
-
-      <button id="yesBtn" onclick="sayYes()">
-        EVET 🤍
-      </button>
-
-      <button id="noBtn"
-        onmouseenter="escapeNo()"
-        ontouchstart="escapeNo()"
-        onclick="escapeNo()">
-        Hayır
-      </button>
-
+      </h2>
     </div>
-  </section>
+
+    <button id="yesBtn" onclick="sayYes()">
+      EVET 🤍
+    </button>
+
+    <button
+      id="noBtn"
+      onmouseenter="escapeNo()"
+      ontouchstart="escapeNo()"
+      onclick="escapeNo()">
+      Hayır
+    </button>
+
+  </div>
+
+</section>
 
 
   <!-- FİNAL -->
