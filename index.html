@@ -506,8 +506,6 @@
     </div>
   </section>
 
-const backgroundMusic = document.getElementById("music");
-const videos = document.querySelectorAll("video");
 
 videos.forEach(video => {
 
@@ -652,7 +650,64 @@ videos.forEach(video => {
       heart.remove();
     }, 7000);
   }
+const backgroundMusic = document.getElementById("music");
+const videos = document.querySelectorAll("video");
 
+let activeVideo = null;
+let musicWasPlayingBeforeVideo = false;
+
+videos.forEach(video => {
+
+  video.addEventListener("play", () => {
+
+    // Başka bir video açıksa onu durdur
+    videos.forEach(otherVideo => {
+      if (otherVideo !== video && !otherVideo.paused) {
+        otherVideo.pause();
+      }
+    });
+
+    activeVideo = video;
+
+    // Şarkı çalıyorsa hatırla ve durdur
+    if (!backgroundMusic.paused) {
+      musicWasPlayingBeforeVideo = true;
+      backgroundMusic.pause();
+    }
+
+  });
+
+  video.addEventListener("pause", () => {
+
+    if (activeVideo === video && !video.ended) {
+
+      const anotherVideoPlaying =
+        [...videos].some(v => v !== video && !v.paused);
+
+      if (!anotherVideoPlaying) {
+        activeVideo = null;
+
+        if (musicWasPlayingBeforeVideo) {
+          backgroundMusic.play().catch(() => {});
+        }
+      }
+    }
+
+  });
+
+  video.addEventListener("ended", () => {
+
+    if (activeVideo === video) {
+      activeVideo = null;
+
+      if (musicWasPlayingBeforeVideo) {
+        backgroundMusic.play().catch(() => {});
+      }
+    }
+
+  });
+
+});
 </script>
 
 </body>
