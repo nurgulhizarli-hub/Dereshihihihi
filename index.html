@@ -199,6 +199,43 @@
         gap: 9px;
       }
     }
+    .opening-screen {
+  width: 100%;
+  height: 100svh;
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+}
+
+.opening-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.opening-controls {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 35px;
+  display: flex;
+  justify-content: center;
+  z-index: 2;
+}
+
+.opening-button {
+  background: rgba(255, 245, 237, 0.92);
+  color: #704d69;
+  padding: 16px 28px;
+  border-radius: 999px;
+  box-shadow: 0 10px 35px rgba(30, 10, 40, 0.35);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
   </style>
   .story-photo {
   width: 100%;
@@ -217,29 +254,22 @@
     <source src="muzik.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- AÇILIŞ -->
-  <section class="screen" id="home">
-    <div class="card">
-      <img
-  src="Codex görsel 22 Eylül 2026 17_24_20.png"
-  alt="Bizim hikayemiz"
-  class="story-photo">
+  
+<!-- AÇILIŞ -->
+<section class="opening-screen" id="home">
 
-      <div class="quote">
-        “Kader gayrete aşıkmış,<br>
-        gel hem kadere hem tüm insanlığa<br>
-        aşkı gösterelim.”
-      </div>
+  <img
+    src="Codex%20g%C3%B6rsel%2022%20Eyl%C3%BCl%202026%2017_24_20.png"
+    alt="Bizim hikayemiz"
+    class="opening-photo">
 
-      <button class="main-button" onclick="startStory()">
-        Hikâyemize dokun 🤍
-      </button>
+  <div class="opening-controls">
+    <button class="main-button opening-button" onclick="startStory()">
+      Hikâyemize dokun 🤍
+    </button>
+  </div>
 
-      <div class="tiny">Ses bu düğmeye dokunduktan sonra başlayacak.</div>
-    </div>
-  </section>
-
-
+</section>
   <!-- MCDONALDS + AVATAR -->
   <section class="screen" id="memory">
     <div class="card">
