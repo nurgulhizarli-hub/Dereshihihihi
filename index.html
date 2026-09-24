@@ -475,7 +475,89 @@
     </div>
   </section>
 
+const backgroundMusic = document.getElementById("music");
+const videos = document.querySelectorAll("video");
 
+videos.forEach(video => {
+
+  video.addEventListener("play", () => {
+    if (!backgroundMusic.paused) {
+      video.dataset.musicWasPlaying = "true";
+      backgroundMusic.pause();
+    } else {
+      video.dataset.musicWasPlaying = "false";
+    }
+  });
+
+  video.addEventListener("pause", () => {
+    if (
+      video.dataset.musicWasPlaying === "true" &&
+      !video.ended
+    ) {
+      backgroundMusic.play().catch(() => {});
+    }
+  });
+
+  video.addEventListener("ended", () => {
+    if (video.dataset.musicWasPlaying === "true") {
+      backgroundMusic.play().catch(() => {});
+    }
+  });
+
+});
+  const backgroundMusic = document.getElementById("music");
+const videos = document.querySelectorAll("video");
+
+let activeVideo = null;
+
+videos.forEach(video => {
+
+  video.addEventListener("play", () => {
+
+    activeVideo = video;
+
+    videos.forEach(otherVideo => {
+      if (otherVideo !== video && !otherVideo.paused) {
+        otherVideo.pause();
+      }
+    });
+
+    if (!backgroundMusic.paused) {
+      video.dataset.musicWasPlaying = "true";
+      backgroundMusic.pause();
+    }
+
+  });
+
+  video.addEventListener("pause", () => {
+
+    if (activeVideo === video && !video.ended) {
+      activeVideo = null;
+
+      const anotherVideoPlaying = [...videos].some(v => !v.paused);
+
+      if (!anotherVideoPlaying) {
+        backgroundMusic.play().catch(() => {});
+      }
+    }
+
+  });
+
+  video.addEventListener("ended", () => {
+
+    if (activeVideo === video) {
+      activeVideo = null;
+
+      const anotherVideoPlaying = [...videos].some(v => !v.paused);
+
+      if (!anotherVideoPlaying) {
+        backgroundMusic.play().catch(() => {});
+      }
+    }
+
+  });
+
+});
 <script>
 
   function startStory() {
