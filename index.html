@@ -329,6 +329,13 @@
   font-size: 11px;
   z-index: 5;
 }
+.memory-video {
+  width: 100%;
+  display: block;
+  margin: 20px 0;
+  border-radius: 24px;
+  box-shadow: 0 15px 40px rgba(40, 20, 50, 0.25);
+}
   </style>
 
 </head>
@@ -398,11 +405,11 @@
         <div class="memory">Fotoğraf 4 📷</div>
       </div>
 
-      <div class="video-placeholder">
-        Buraya videomuzu koyacağız 🎬
-      </div>
+   <video controls playsinline class="memory-video">
+  <source src="./WhatsApp%20Video%202026-09-24%20at%2015.37.44.mp4" type="video/mp4">
+</video>
 
-      <div class="video-placeholder">
+      <div class="video-placeholder"> 
         Buraya ikinci videomuzu koyacağız 🎞️
       </div>
 
