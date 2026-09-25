@@ -819,7 +819,7 @@ background-repeat: no-repeat;
 <body>
 
   <!-- MÜZİK -->
- <audio id="music" loop preload="auto">
+<audio id="music" loop preload="auto">
   <source
     src="./Can%20Bonomo%20-%20Tastamam%20%28Official%20Audio%29%28_wNQkWmb-NeM_%29.m4a"
     type="audio/mp4">
@@ -1004,16 +1004,23 @@ background-repeat: no-repeat;
 
 <script>
 
-  function startStory() {
-    const music = document.getElementById("music");
+ function startStory() {
+  const music = document.getElementById("music");
 
-    music.volume = 0.45;
-    music.play().catch(() => {});
+  music.volume = 0.55;
 
-    document.getElementById("memory").scrollIntoView({
-      behavior: "smooth"
+  music.play()
+    .then(() => {
+      console.log("Müzik başladı");
+    })
+    .catch(error => {
+      console.log("Müzik hatası:", error);
     });
-  }
+
+  document.getElementById("memory").scrollIntoView({
+    behavior: "smooth"
+  });
+}
 function escapeNo() {
   const button = document.getElementById("noBtn");
   const box = document.querySelector("#question .proposal-buttons");
