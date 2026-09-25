@@ -456,6 +456,34 @@
     bottom: 43px;
   }
 }
+    /* BAZI ANLAR... ARKA PLAN */
+#memory {
+  position: relative;
+  background-image: url("./612bc6b9-c52d-4961-8c59-80c8b89ad53c.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+/* Yazılar rahat okunsun diye fotoğrafın üstüne hafif karartma */
+#memory::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(40, 20, 45, 0.32);
+  z-index: 0;
+}
+
+/* Kart ve yazılar fotoğrafın üstünde kalsın */
+#memory .card {
+  position: relative;
+  z-index: 1;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  backdrop-filter: none;
+}
   </style>
 
 </head>
