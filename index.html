@@ -484,6 +484,148 @@
   box-shadow: none;
   backdrop-filter: none;
 }
+    /* TAM EKRAN ANILAR SAYFASI */
+
+.memories-screen {
+  width: 100%;
+  height: 100svh;
+  padding: 20px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.memories-content {
+  width: min(96vw, 1100px);
+  height: 94svh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.memories-content h2 {
+  margin: 0 0 16px;
+  font-size: clamp(27px, 5vw, 42px);
+}
+
+
+/* ÜÇ KUTU */
+
+.memories-three {
+  width: 100%;
+  flex: 1;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+
+  min-height: 0;
+}
+
+.memory-box {
+  height: 100%;
+  min-width: 0;
+
+  padding: 8px;
+
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 8px;
+
+  border-radius: 25px;
+
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.25);
+
+  box-shadow: 0 12px 35px rgba(30,15,40,.22);
+
+  overflow: hidden;
+}
+
+
+/* FOTOĞRAFLAR */
+
+.box-media {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+
+  object-fit: cover;
+
+  border-radius: 18px;
+
+  display: block;
+}
+
+
+/* VİDEOLAR */
+
+.box-video {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+
+  object-fit: cover;
+
+  border-radius: 18px;
+
+  background: #111;
+
+  display: block;
+}
+
+
+/* DEVAM BUTONU */
+
+.memories-next {
+  flex-shrink: 0;
+  margin-top: 14px;
+}
+
+
+/* TELEFON */
+
+@media (max-width: 600px) {
+
+  .memories-screen {
+    padding: 14px 8px;
+  }
+
+  .memories-content {
+    width: 100%;
+    height: 96svh;
+  }
+
+  .memories-content h2 {
+    font-size: 27px;
+    margin-bottom: 10px;
+  }
+
+  .memories-three {
+    gap: 6px;
+  }
+
+  .memory-box {
+    padding: 4px;
+    gap: 4px;
+    border-radius: 16px;
+  }
+
+  .box-media,
+  .box-video {
+    border-radius: 12px;
+  }
+
+  .memories-next {
+    margin-top: 10px;
+    padding: 12px 20px;
+    font-size: 15px;
+  }
+
+}
   </style>
 
 </head>
@@ -537,38 +679,76 @@
 
 
   <!-- FOTOĞRAF VE VİDEOLAR -->
-  <section class="screen" id="album">
-    <div class="card">
-      <h2>Anılarımız 🤍</h2>
+<!-- ANILARIMIZ -->
+<section class="memories-screen" id="album">
 
-      <p>
-        Birkaç fotoğrafa sığan, ama aslında çok daha büyük olan hikâyemiz.
-      </p>
+  <div class="memories-content">
 
-      <div class="gallery">
-        <img src="./WhatsApp%20Image%202026-09-24%20at%2015.44.48.jpeg" class="memory-photo" alt="Anımız 1">
+    <h2>Anılarımız 🤍</h2>
 
-<img src="./WhatsApp%20Image%202026-09-24%20at%2015.37.21.jpeg" class="memory-photo" alt="Anımız 2">
+    <div class="memories-three">
 
-<img src="./WhatsApp%20Image%202026-09-24%20at%2015.37.21%20%284%29.jpeg" class="memory-photo" alt="Anımız 3">
+      <!-- 1. KUTU -->
+      <div class="memory-box">
 
-<img src="./WhatsApp%20Image%202026-09-24%20at%2015.37.21%20%281%29.jpeg" class="memory-photo" alt="Anımız 4">
+        <img
+          src="./WhatsApp%20Image%202026-09-24%20at%2015.44.48.jpeg"
+          class="box-media"
+          alt="Anımız 1">
+
+        <img
+          src="./WhatsApp%20Image%202026-09-24%20at%2015.37.21.jpeg"
+          class="box-media"
+          alt="Anımız 2">
+
       </div>
 
-   <video controls playsinline class="memory-video">
-  <source src="./WhatsApp%20Video%202026-09-24%20at%2015.37.44.mp4" type="video/mp4">
-</video>
 
-      <div class="video-placeholder"> 
-        Buraya ikinci videomuzu koyacağız 🎞️
+      <!-- 2. KUTU -->
+      <div class="memory-box">
+
+        <img
+          src="./WhatsApp%20Image%202026-09-24%20at%2015.37.21%20%284%29.jpeg"
+          class="box-media"
+          alt="Anımız 3">
+
+        <img
+          src="./WhatsApp%20Image%202026-09-24%20at%2015.37.21%20%281%29.jpeg"
+          class="box-media"
+          alt="Anımız 4">
+
       </div>
 
-      <button class="main-button"
-        onclick="document.getElementById('question').scrollIntoView()">
-        Bir şey daha soracağım…
-      </button>
+
+      <!-- 3. KUTU -->
+      <div class="memory-box video-box">
+
+        <video controls playsinline class="box-video">
+          <source
+            src="./WhatsApp%20Video%202026-09-24%20at%2015.37.44.mp4"
+            type="video/mp4">
+        </video>
+
+        <video controls playsinline class="box-video">
+          <source
+            src="./WhatsApp%20Video%202026-09-25%20at%2005.54.49.mp4"
+            type="video/mp4">
+        </video>
+
+      </div>
+
     </div>
-  </section>
+
+
+    <button
+      class="main-button memories-next"
+      onclick="document.getElementById('question').scrollIntoView({behavior:'smooth'})">
+      Bir şey daha soracağım… 🤍
+    </button>
+
+  </div>
+
+</section>
 
 
 <!-- MCDONALDS TEKLİF EKRANI -->
