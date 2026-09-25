@@ -643,6 +643,170 @@ z-index: 2;
   }
 
 }
+    .final-gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin: 22px 0;
+}
+
+.final-photo {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 22px;
+  display: block;
+
+  box-shadow: 0 12px 30px rgba(40, 20, 50, 0.25);
+}
+    .final-screen {
+  width: 100%;
+  height: 100svh;
+  padding: 20px 16px;
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+  overflow: hidden;
+
+  background:
+    linear-gradient(rgba(55, 30, 60, 0.32), rgba(55, 30, 60, 0.45)),
+    radial-gradient(circle at top left, rgba(255, 210, 220, 0.18), transparent 35%),
+    radial-gradient(circle at bottom right, rgba(210, 170, 255, 0.16), transparent 35%);
+}
+
+.final-content {
+  width: min(96vw, 1000px);
+  height: 92svh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.final-content h1 {
+  margin-bottom: 10px;
+}
+
+.final-text {
+  margin-bottom: 18px;
+  font-size: 16px;
+}
+
+.final-gallery {
+  width: 100%;
+  flex: 1;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+
+  align-items: center;
+  margin: 10px 0 18px;
+  min-height: 0;
+}
+
+.final-photo {
+  width: 100%;
+  height: 100%;
+  max-height: 52svh;
+
+  object-fit: cover;
+  border-radius: 26px;
+  display: block;
+
+  box-shadow: 0 16px 38px rgba(25, 10, 35, 0.28);
+}
+
+.final-quote {
+  margin-top: 8px;
+  font-size: clamp(22px, 5vw, 34px);
+}
+
+@media (max-width: 600px) {
+  .final-screen {
+    padding: 14px 10px;
+  }
+
+  .final-content {
+    height: 95svh;
+  }
+
+  .final-gallery {
+    gap: 10px;
+  }
+
+  .final-photo {
+    max-height: 42svh;
+    border-radius: 18px;
+  }
+
+  .final-text {
+    font-size: 14px;
+  }
+}
+    /* FİNAL PARILTILARI */
+
+.final-screen::before,
+.final-screen::after {
+  content: "";
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.35;
+  pointer-events: none;
+  animation: finalGlow 7s ease-in-out infinite alternate;
+}
+
+.final-screen::before {
+  top: -70px;
+  left: -80px;
+  background: rgba(255, 190, 215, 0.65);
+}
+
+.final-screen::after {
+  right: -80px;
+  bottom: -70px;
+  background: rgba(205, 175, 255, 0.60);
+  animation-delay: 2s;
+}
+
+@keyframes finalGlow {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.22;
+  }
+
+  100% {
+    transform: scale(1.18);
+    opacity: 0.48;
+  }
+}
+
+.final-content {
+  animation: finalAppear 1.2s ease;
+}
+
+@keyframes finalAppear {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
   </style>
 
 </head>
@@ -797,27 +961,37 @@ z-index: 2;
 
 
 
-  <!-- FİNAL -->
-  <section class="screen" id="finalScreen">
-    <div class="card">
+<!-- FİNAL -->
+<section class="final-screen" id="finalScreen">
+  <div class="final-content">
 
-      <h1>Doğru kararı vereceğini biliyorduk 🤍</h1>
+    <h1>Doğru kararı vereceğini biliyorduk 🤍</h1>
 
-     
+    <p class="final-text">
+      Belki bazı hikâyeler yeniden yazılmayı hak eder.
+    </p>
 
-      <div class="gallery">
-        <div class="memory">Çocukluk fotoğrafı 1 🌙</div>
-        <div class="memory">Çocukluk fotoğrafı 2 ⭐</div>
-      </div>
+    <div class="final-gallery">
 
-       <p class="quote">
-  Kocaman sarılıp mutlu olalım mı?
-</p>
-      
+      <img
+        src="./WhatsApp%20Image%202026-09-24%20at%2015.37.20.jpeg"
+        class="final-photo"
+        alt="Çocukluk fotoğrafı 1">
+
+      <img
+        src="./8c6582b6-7c45-433e-93f2-36e1a4b0fc56.png"
+        class="final-photo"
+        alt="Çocukluk fotoğrafı 2">
 
     </div>
-  </section>
 
+    <p class="quote final-quote">
+      Kocaman sarılıp mutlu olalım mı?
+    </p>
+
+  </div>
+</section>
+ 
 
 <script>
 
@@ -859,9 +1033,9 @@ function escapeNo() {
       behavior: "smooth"
     });
 
-    for (let i = 0; i < 18; i++) {
-      setTimeout(createHeart, i * 180);
-    }
+    for (let i = 0; i < 24; i++) {
+  setTimeout(createHeart, i * 320);
+}
   }
 
 
