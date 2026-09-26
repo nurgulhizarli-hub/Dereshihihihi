@@ -976,7 +976,9 @@ background-repeat: no-repeat;
 
     <p class="final-text">
      
-      Bazı hikâyeler yeniden yazılmayı hak eder. Hayatımda seni rahatsız hiçbir şeyi hayatımda tutmam.
+      Bazı hikâyeler yeniden yazılmayı hak eder. Benim hayatımda da
+      hikayemde de çok önemlisin. Seni rahatsız eden şeylerin hayatımda
+      bu yüzden yeri yok.
     </p>
 
     <div class="final-gallery">
@@ -995,6 +997,7 @@ background-repeat: no-repeat;
     </div>
 
     <p class="quote final-quote">
+      Seni Çok Seviyorum 
       Kocaman sarılıp mutlu olalım mı?
     </p>
 
@@ -1004,21 +1007,27 @@ background-repeat: no-repeat;
 
 <script>
 
-  function startStory() {
+ function startStory() {
   const music = document.getElementById("music");
 
-  music.volume = 0.55;
+  const targetVolume = 0.55;
+  music.volume = 0;
+  music.currentTime = 28;
 
-  const playFrom28 = () => {
-    music.currentTime = 28;
-    music.play().catch(() => {});
-  };
+  music.play().catch(() => {});
 
-  if (music.readyState >= 1) {
-    playFrom28();
-  } else {
-    music.addEventListener("loadedmetadata", playFrom28, { once: true });
-  }
+  let currentVolume = 0;
+
+  const fadeIn = setInterval(() => {
+    currentVolume += 0.03;
+
+    if (currentVolume >= targetVolume) {
+      music.volume = targetVolume;
+      clearInterval(fadeIn);
+    } else {
+      music.volume = currentVolume;
+    }
+  }, 120);
 
   document.getElementById("memory").scrollIntoView({
     behavior: "smooth"
